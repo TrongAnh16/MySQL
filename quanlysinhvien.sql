@@ -66,3 +66,23 @@ SELECT * FROM Subject WHERE Credit < 10;
 SELECT S.StudentId, S.StudentName, C.ClassName
 FROM Student S join Class C on S.StudentId = C.ClassID
 WHERE C.ClassName = 'A1';
+
+SELECT * FROM Student
+WHERE StudentName LIKE 'h%';
+
+SELECT * FROM Class
+WHERE StartDate LIKE '%-12-%';
+
+SELECT * FROM Subject
+WHERE Credit >= 3 AND Credit <= 5;
+
+UPDATE Student
+SET ClassID = 2
+WHERE StudentName = 'Hung';
+
+SELECT Student.StudentName, Subject.SubName, Mark.Mark
+FROM ((Student
+LEFT JOIN Mark ON Student.StudentID = Mark.StudentID
+    )
+LEFT JOIN Subject ON Subject.SubID = Mark.SubID)
+ORDER BY Mark DESC, StudentName ASC;
