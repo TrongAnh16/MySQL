@@ -104,3 +104,28 @@ FROM Student
 INNER JOIN Mark M on Student.StudentID = M.StudentID
 GROUP BY Student.StudentID, Student.StudentName
 ORDER BY AVGMark DESC;
+
+-- Hiển thị số lượng sinh viên ở từng nơi
+SELECT Address, COUNT(StudentID) AS 'Số lượng học viên'
+FROM Student
+GROUP BY Address;
+
+-- Tính điểm trung bình các môn học của mỗi học viên
+SELECT Student.StudentID, Student.StudentName, AVG(Mark.Mark)
+FROM Student
+INNER JOIN Mark ON student.StudentID = Mark.StudentID
+GROUP BY Student.StudentID, Student.StudentName;
+
+-- Hiển thị những bạn học viên có điểm trung bình các môn học lớn hơn 15
+SELECT Student.StudentID, Student.StudentName, AVG(Mark.Mark)
+FROM Student
+INNER JOIN Mark ON student.StudentID = Mark.StudentID
+GROUP BY Student.StudentID, Student.StudentName
+HAVING AVG(Mark.Mark) > 15;
+
+-- Hiển thị thông tin các học viên có điểm trung bình lớn nhất.
+SELECT Student.StudentID, Student.StudentName, AVG(Mark.Mark)
+FROM Student
+INNER JOIN Mark ON student.StudentID = Mark.StudentID
+GROUP BY Student.StudentID, Student.StudentName
+HAVING AVG(Mark.Mark) >= ALL (SELECT AVG(Mark.Mark) FROM Mark GROUP BY Mark.StudentID);
