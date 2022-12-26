@@ -86,3 +86,21 @@ LEFT JOIN Mark ON Student.StudentID = Mark.StudentID
     )
 LEFT JOIN Subject ON Subject.SubID = Mark.SubID)
 ORDER BY Mark DESC, StudentName ASC;
+
+-- Hiển thị tất cả các thông tin môn học (bảng subject) có credit lớn nhất.
+SELECT *
+FROM Subject
+WHERE Credit = (SELECT MAX(Credit) FROM Subject);
+
+-- Hiển thị các thông tin môn học có điểm thi lớn nhất.
+SELECT *
+FROM Subject
+INNER JOIN Mark M on Subject.SubID = M.SubID
+WHERE Mark = (SELECT MAX(Mark) FROM Mark);
+
+-- Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, xếp hạng theo thứ tự điểm giảm dần
+SELECT Student.StudentID, StudentName, AVG(Mark) AS AVGMark
+FROM Student
+INNER JOIN Mark M on Student.StudentID = M.StudentID
+GROUP BY Student.StudentID, Student.StudentName
+ORDER BY AVGMark DESC;
