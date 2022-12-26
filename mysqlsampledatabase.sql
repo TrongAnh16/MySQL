@@ -7998,7 +7998,19 @@ CALL SetCounter(@counter,1); -- 3
 CALL SetCounter(@counter,5); -- 8
 SELECT @counter; -- 8
 
+-- Tạo View có tên customer_views truy vấn dữ liệu từ bảng customers để lấy các dữ liệu:
+-- customerNumber, customerName, phone bằng câu lệnh SELECT:
+CREATE VIEW customer_views AS
+SELECT customerNumber, customerName, phone
+FROM  customers;
+select * from customer_views;
 
+CREATE OR REPLACE VIEW customer_views AS
+SELECT customerNumber, customerName, contactFirstName, contactLastName, phone
+FROM customers
+WHERE city = 'Nantes';
+select * from customer_views;
 
+DROP VIEW customer_views;
 
 
