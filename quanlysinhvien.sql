@@ -129,3 +129,4 @@ FROM Student
 INNER JOIN Mark ON student.StudentID = Mark.StudentID
 GROUP BY Student.StudentID, Student.StudentName
 HAVING AVG(Mark.Mark) >= ALL (SELECT AVG(Mark.Mark) FROM Mark GROUP BY Mark.StudentID);
+
